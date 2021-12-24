@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import App from "./App";
 import { RecoilRoot } from "recoil";
-import { DarkTheme } from "./styles";
+import { darkTheme } from "./styles/theme";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -60,7 +60,7 @@ table {
 body {
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color:${(props) => props.theme.bgColor};
+  background-color:${(props) => props.theme.background.primary};
 
   color:black;
   line-height: 1.2;
@@ -74,7 +74,7 @@ a {
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider theme={DarkTheme}>
+      <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
         <App />
       </ThemeProvider>
