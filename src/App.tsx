@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useRecoilState } from "recoil";
 import {
   DragDropContext,
@@ -8,32 +8,61 @@ import {
 } from "react-beautiful-dnd";
 import styled, { ThemeProvider } from "styled-components";
 import { colorSchemeState, todoState } from "./model/atom";
-import DraggableCard from "./components/DraggableCard";
+import { motion, useMotionValue } from "framer-motion";
 
-import { breakpoints, darkTheme, lightTheme } from "./styles/theme";
-import { GlobalStyles } from "./styles/global.reset";
-import MainRouter from "./routes/main.router";
-
-const Container = styled.div`
-  width: 100vw;
+const Wrapper = styled.div`
   height: 100vh;
-  min-width: ${breakpoints.sm};
-  background-color: ${(props) => props.theme.background.primary};
-  color: ${(props) => props.theme.color.primary};
+  width: 100vw;
   display: flex;
   justify-content: center;
-  overflow: scroll;
+  align-items: center;
+`;
+const Box = styled(motion.div)`
+  width: 200px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 50px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+const boxVars = {
+  // configure transition inside of the last stage
+  hover: { scale: 1.5, rotateZ: 90 },
+  click: { borderRadius: "100px", scale: 1 },
+  drag: { backgroundColor: "#25CCF7", transition: { duration: 10 } },
+};
+const BiggerBox = styled.div`
+  width: 600px;
+  height: 600px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 `;
 function App() {
+  const biggerBoxRef = useRef<HTMLDivElement>(null);
   const [toDos, setTodos] = useRecoilState(todoState);
   const [colorScheme] = useRecoilState(colorSchemeState);
+  const x = useMotionValue(0);
   return (
-    <ThemeProvider theme={colorScheme === "dark" ? darkTheme : lightTheme}>
-      <GlobalStyles />
-      <Container>
-        <MainRouter />
-      </Container>
-    </ThemeProvider>
+    <Wrapper>
+      <BiggerBox ref={biggerBoxRef}>
+        <Box
+          drag
+          dragConstraints={
+            biggerBoxRef
+          } /*create a ref to make a component as the constraint*/
+          dragElastic
+          variants={boxVars}
+          whileDrag="drag"
+          whileHover="hover"
+          whileTap="click"
+        />
+      </BiggerBox>
+      {/*모션 제스쳐 이벤트 리스너 while*/}
+      {/*blue 나 red같은 string값들 대신 애니메이트 될 수 있도록 숫자로된 값들을 넣야야함(예:rgba)*/}
+    </Wrapper>
   );
 }
 

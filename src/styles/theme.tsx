@@ -1,37 +1,7 @@
 import { DefaultTheme } from "styled-components";
 
-export const darkTheme: DefaultTheme = {
-  color: {
-    primary: "#eee",
-    secondary: "rgb(78,171,205)",
-    border: "rgb(219,219,219)",
-    link: "#0095f6",
-    button: "white",
-    like: "#ED4956",
-  },
-  background: {
-    primary: "#333",
-    secondary: "#454545",
-    button: "#4795f6",
-    avatar: "#dbdbdb",
-  },
-};
-export const lightTheme: DefaultTheme = {
-  color: {
-    primary: "black",
-    secondary: "rgb(96,96, 96)",
-    border: "rgb(219,219,219)",
-    link: "#0095f6",
-    button: "white",
-    like: "#ED4956",
-  },
-  background: {
-    primary: "#fafafa",
-    secondary: "#ccc",
-    button: "#4795f6",
-    avatar: "#dbdbdb",
-  },
-};
+export const darkTheme: DefaultTheme = {};
+export const lightTheme: DefaultTheme = {};
 export const breakpoints = {
   xs: "480px",
   sm: "600px",

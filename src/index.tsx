@@ -60,7 +60,7 @@ table {
 body {
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color:${(props) => props.theme.background.primary};
+  background:linear-gradient(135deg,#e09,#d0e);
 
   color:black;
   line-height: 1.2;
