@@ -127,16 +127,18 @@ function App() {
   return (
     <Wrapper>
       <AnimatePresence>
-        <Box
-          custom={back}
-          variants={backVars}
-          initial="entry"
-          animate="center"
-          exit="exit"
-          key={visible}
-        >
-          {visible}
-        </Box>
+        {slider.map((num, idx) => (
+          <Box
+            custom={idx}
+            variants={backVars}
+            initial="entry"
+            animate="center"
+            exit="exit"
+            key={slider[1]}
+          >
+            {slider[1]}
+          </Box>
+        ))}
       </AnimatePresence>
       <button onClick={nextPlease}>next</button>
       <button onClick={prevPlease}>prev</button>
